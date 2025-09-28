@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Задача</title>
+    <meta charset="UTF-8" />
+</head>
+<body>
+<h2 id="task-title">Lvl </h2>
+<div id="task-condition">Условие задачи</div>
+<form id="answerForm">
+    <input type="text" id="answer" placeholder="Ваш ответ" required />
+    <button type="submit">Отправить</button>
+</form>
+<a id="nextLink" href="#">Следующее задание</a>
+<div>Решённых задач: <span id="solvedCount">0</span></div>
+
+<script>
+    const pathParts = window.location.pathname.split('/');
+    const taskNumber = parseInt(pathParts[pathParts.length - 1]);
+
+    const tasks = {
+        1: { title: 'Lvl 1', condition: 'Что такое HTML?', answer: 'HyperText Markup Language' },
+        2: { title: 'Lvl 2', condition: 'Что такое CSS?', answer: 'Cascading Style Sheets' },
+        3: { title: 'Lvl 3', condition: 'Что такое JavaScript?', answer: 'JavaScript' },
+        4: { title: 'Lvl 4', condition: 'Задача 4', answer: 'Ответ4' },
+        5: { title: 'Lvl 5', condition: 'Задача 5', answer: 'Ответ5' },
+        6: { title: 'Lvl 6', condition: 'Задача 6', answer: 'Ответ6' },
+        7: { title: 'Lvl 7', condition: 'Задача 7', answer: 'Ответ7' },
+        8: { title: 'Lvl 8', condition: 'Задача 8', answer: 'Ответ8' },
+        9: { title: 'Lvl 9', condition: 'Задача 9', answer: 'Ответ9' },
+        10: { title: 'Lvl 10', condition: 'Задача 10', answer: 'Ответ10' },
+        11: { title: 'Lvl 11', condition: 'Задача 11', answer: 'Ответ11' },
+        12: { title: 'Lvl 12', condition: 'Задача 12', answer: 'Ответ12' }
+    };
+
+    const task = tasks[taskNumber];
+
+    if (!task) {
+        document.body.innerHTML = '<h2>Задача не найдена</h2>';
+    } else {
+        // Заполняем данными
+        document.getElementById('task-title').innerText = task.title;
+        document.getElementById('task-condition').innerText = task.condition;
+
+        const nextNumber = taskNumber + 1;
+        const nextLink = document.getElementById('nextLink');
+        if (tasks[nextNumber]) {
+            nextLink.href = `/task/${nextNumber}`;
+            nextLink.innerText = 'Следующее задание';
+        } else {
+            nextLink.style.display = 'none';
+        }
+
+        // Загружаем прогресс из localStorage
+        let solvedTasks = parseInt(localStorage.getItem('solved_tasks') || '0');
+        document.getElementById('solvedCount').innerText = solvedTasks;
+
+        // Проверка доступа
+        if (solvedTasks < taskNumber - 1) {
+            alert(`Чтобы открыть это задание, решите предыдущие. Решённых задач: ${solvedTasks}. Требуется: ${taskNumber - 1}`);
+            nextLink.style.pointerEvents = 'none';
+            nextLink.style.opacity = '0.5';
+        }
+
+        // Проверяем, уже решена ли эта задача (сравниваем с localStorage)
+        let alreadySolved = solvedTasks >= taskNumber;
+
+        // Обработка формы
+        document.getElementById('answerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const userAnswer = document.getElementById('answer').value.trim().toLowerCase();
+            const correctAnswer = task.answer.toLowerCase();
+
+            if (userAnswer === correctAnswer) {
+                alert('Правильно!');
+
+                // Если задача уже решена — не обновляем счётчик
+                if (alreadySolved) {
+                    alert('Эта задача уже решена. Баллы не увеличиваются.');
+                } else {
+                    // Отправляем на API
+                    fetch(`/api/tasks/solve/${taskNumber}`, { method: 'POST' })
+                        .then(res => {
+                            if (res.ok) {
+                                // Обновляем localStorage
+                                let newCount = solvedTasks + 1;
+                                localStorage.setItem('solved_tasks', newCount);
+                                solvedTasks = newCount;
+                                document.getElementById('solvedCount').innerText = solvedTasks;
+                                // Обновляем статус
+                                alreadySolved = true;
+
+                                // Разблокировать переход
+                                nextLink.style.pointerEvents = '';
+                                nextLink.style.opacity = '';
+                                alert('Прогресс обновлён! Теперь вы можете перейти к следующему заданию.');
+                            } else {
+                                alert('Ошибка при обновлении прогресса.');
+                            }
+                        });
+                }
+            } else {
+                alert('Неправильно. Попробуйте снова.');
+            }
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Capture Smallz';
+    background-color: rgba(6, 28, 28, 1);
+    background-image: url('back.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+header {
+    background-color: #081a19;
+    padding: 8px 20px;
+    display: flex;
+    font-size: 16px;
+    justify-content: flex-end; /* меню справа */
+}
+
+/* Список меню без маркеров и с горизонтальным расположением */
+nav.menu > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 25px; /* расстояние между пунктами */
+}
+
+nav.menu > ul > li {
+    position: relative; /* для позиционирования подменю */
+}
+
+/* Ссылки меню */
+nav.menu > ul > li > a {
+    color: #4a4f55;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+}
+
+
+nav.menu > ul > li > a:hover {
+    background-color: #0b2e2a;
+}
+
+
+li ul {
+    display: none;
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: auto; /* фиксированная ширина для подменю */
+    background-color: #0d3833;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+li ul li a {
+    padding: 10px 15px;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+li:hover > ul {
+    display: block;
+}
+
+
+main {
+    flex: 1;
+    padding: 40px 20px;
+    text-align: center;
+    font-size: 24px;
+    height: auto;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #082320;
+    color: #fff;
+    padding: 25px 20px 10px 50px;
+    font-size: 16px;
+    text-align: right;
+}
+
+/* Дизайн таблицы*/
+table {
+    width:60%;
+    background-color: #374444;
+    margin-right: auto;
+    border-collapse: separate;
+    border-spacing: 18px;
+    border-radius: 15px;
+    font-family: 'Capture Smallz';
+}
+
+table.buttons-table {
+    margin-left: 40px;
+}
+
+.buttons-table button {
+    width: 240px;
+    height: 133px;
+    background-color: #D9D9D9;
+    opacity: 0.7;
+    font-size: 30px;
+    font-family: 'Capture Smallz';
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.buttons-table button {
+    width: 220px;
+    height: 120px;
+    margin: 10px;
+    background-color: #D9D9D9;
+    opacity: 0.7;
+    font-size: 30px;
+    font-family: 'Capture Smallz';
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.6s, transform 0.2s;
+}
+
+.buttons-table button:hover {
+    background-color: #c0c0c0; /* чуть более тёмный цвет при наведении */
+    transform: scale(1.05); /* лёгкое увеличение при наведении */
+}
+
+
+@font-face {
+    font-family: 'Capture Smallz';
+    src: url('19182.ttf') format('truetype');
+}

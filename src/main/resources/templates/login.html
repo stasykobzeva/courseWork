@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+</head>
+<body>
+<h2>Авторизация</h2>
+<form id="loginForm">
+    <input type="text" id="username" placeholder="Логин" required />
+    <br />
+    <input type="password" id="password" placeholder="Пароль" required />
+    <br />
+    <button type="submit">Войти</button>
+</form>
+<p><a th:href="@{/register}">Нет аккаунта? Зарегистрироваться</a></p>
+<p id="message"></p>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        login();
+    });
+
+    function login() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        fetch('/api/login', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({username, password}),
+            credentials: "include"
+        })
+            .then(res => {
+                if (res.ok) {
+                    window.location.href = "/profile";
+                } else {
+                    return res.text().then(text => {throw new Error(text)});
+                }
+            })
+            .catch(err => {
+                document.getElementById('message').innerText = err.message;
+            });
+    }
+</script>
+</body>
+</html>

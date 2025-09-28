@@ -1,0 +1,142 @@
+/* Общие стили */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Capture Smallz';
+    background-color: rgba(6, 28, 28, 1);
+    background-image: url('back.jpg');
+    /*background-size: cover; !* чтобы изображение покрывало весь фон *!
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(255, 255, 255, 0.7);*/
+}
+
+/* Хедер */
+header {
+    background-color: #081a19;
+    padding: 8px 20px;
+    display: flex;
+    font-size: 16px;
+    justify-content: flex-end; /* меню справа */
+}
+
+/* Список меню без маркеров и с горизонтальным расположением */
+nav.menu > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 25px; /* расстояние между пунктами */
+}
+
+nav.menu > ul > li {
+    position: relative; /* для позиционирования подменю */
+}
+
+/* Ссылки меню */
+nav.menu > ul > li > a {
+    color: #4a4f55;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Эффект наведения */
+nav.menu > ul > li > a:hover {
+    background-color: #0b2e2a;
+}
+
+/* Подменю */
+li ul {
+    display: none;
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: auto; /* фиксированная ширина для подменю */
+    background-color: #0d3833;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Пункты подменю */
+li ul li a {
+    padding: 10px 15px;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    width: 100%; /* растягиваем по ширине подменю */
+    box-sizing: border-box;
+}
+
+/* Отображение подменю при наведении */
+li:hover > ul {
+    display: block;
+}
+
+/* Тело сайта */
+main {
+    flex: 1;
+    padding: 40px 20px;
+    text-align: center;
+    font-size: 24px;
+    height: auto;
+}
+
+/* Стиль для кнопки "Начать игру" */
+button {
+    padding: 15px 30px;
+    font-size: 20px;
+    font-family: 'Capture Smallz';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    bottom: 25vh;
+    cursor: pointer;
+    background-color: rgba(147, 100, 100, 0.75);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #4a4f55;
+}
+
+.crypto-text {
+    position: fixed;
+    top: 50%; /* по вертикали по центру */
+    left: 50%; /* по горизонтали по центру */
+    transform: translate(-50%, -50%);
+    bottom: 40%;
+    font-size: 90px;
+    color:rgb(150, 151, 151);
+    font-family:'Capture Smallz';
+    opacity: 0;
+    white-space: pre;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #082320;
+    color: #fff;
+    padding: 25px 20px 10px 0px; /* слева 20px вместо 50px */
+    font-size: 16px;
+    text-align: right;
+}
+
+/* Подключение шрифта */
+@font-face {
+    font-family: 'Capture Smallz';
+    src: url('19182.ttf') format('truetype');
+}
