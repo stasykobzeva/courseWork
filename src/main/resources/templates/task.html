@@ -79,6 +79,49 @@
         .wide-column {
             width: 50%;
         }
+
+        .modal {
+        display: none; /* скрыто по умолчанию */
+        position: fixed;
+        z-index: 1000; /* поверх всего */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.6); /* затемнение фона */
+        }
+
+        /* Контент окна */
+        .modal-content {
+        background-color: #0d3833;
+        margin: 10% auto;
+        padding: 20px;
+        border-radius: 10px;
+        width: 50%;
+        color: #fff;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-content p {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 18px;
+        line-height: 1.5;
+        }
+
+        /* Кнопка закрытия */
+        .close {
+        color: #aaa;
+        float: right;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+        }
+        .close:hover {
+        color: #fff;
+        }
+
     </style>
 </head>
 
@@ -98,7 +141,7 @@
                     <a href="#">Играть</a>
                     <ul>
                         <li><a th:href="@{/profile}">Меню</a></li>
-                        <li><a href="#">Справка</a></li>
+                        <li><a th:href="@{/book}">Справка</a></li>
                         <li><a href="#">Достижения</a></li>
                     </ul>
                 </li>
@@ -140,6 +183,14 @@
         </div>
     </div>
 
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Подсказка</h3>
+            <p id="helpText">Текст подсказки появится здесь</p>
+        </div>
+    </div>
+
     <script>
         const pathParts = window.location.pathname.split('/');
         const taskNumber = parseInt(pathParts[pathParts.length - 1]);
@@ -147,9 +198,9 @@
         const tasks = {
             1: {
                 title: 'Lvl 1. Шифр Цезаря',
-                condition: 'YHGL YLGL YLFL?',
+                condition: 'YHGL YLGL YLFL',
                 answer: 'VENI VIDI VICI',
-                description: 'Расшифруйте текст, записанный при помощи шифра Цезаря буквами латинского алфавита. Известно, что шифрование выполнялось с циклическим сдвигом влево на 3 позиции. В качестве ответа предоставьте фразу без дополнительных символов, слова запишите через пробел. Регистр не учитывается.'
+                description: 'Расшифруйте текст, записанный при помощи шифра Цезаря буквами латинского алфавита. Известно, что шифрование выполнялось с циклическим сдвигом влево на 3 позиции.\nВ качестве ответа предоставьте фразу без дополнительных символов, слова запишите через пробел. Регистр не учитывается.'
             },
             2: {
                 title: 'Lvl 2. Шифр Цезаря, продолжение',
@@ -227,9 +278,29 @@
             }
         };
 
+        const helpModal = document.getElementById('helpModal');
+        const closeBtn = document.querySelector('.close');
+
+        // При нажатии на кнопку "Помощь" — показываем модалку
         helpBtn.addEventListener('click', () => {
-            window.location.href = `/info?level=${taskNumber}`;
+        // Вместо перехода на другую страницу подставляем текст
+        const helpText = document.getElementById('helpText');
+        helpText.innerText = tasks[taskNumber].description; // берем описание задачи
+        helpModal.style.display = 'block';
         });
+
+        // При нажатии на крестик — скрываем модалку
+        closeBtn.addEventListener('click', () => {
+        helpModal.style.display = 'none';
+        });
+
+        // При клике вне окна — тоже закрываем
+        window.addEventListener('click', (e) => {
+        if (e.target === helpModal) {
+            helpModal.style.display = 'none';
+        }
+        });
+
         const task = tasks[taskNumber];
 
         if (!task) {
