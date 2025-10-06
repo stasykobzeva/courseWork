@@ -24,7 +24,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#">Контакты</a>
+                <a th:href="@{/contacts}">Контакты</a>
             </li>
 
             <li>
@@ -100,43 +100,37 @@
             });
     }
 
-    // Обработка формы входа
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-
-        fetch('/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username: username, password: password })
-        })
-            .then(res => {
-                if (res.ok) {
-                    // Успех — перейти на профиль
-                    window.location.href = "/profile";
-                } else {
-                    return res.text().then(text => alert('Ошибка: ' + text));
-                }
-            })
-            .catch(error => {
-                alert('Ошибка сети: ' + error);
-            });
-    });
-
-    // Обновляем отображение решённых задач при загрузке
-    document.addEventListener('DOMContentLoaded', () => {
-        const solvedTasks = localStorage.getItem('solved_tasks') || '0';
-        document.getElementById('solved-tasks').innerText = solvedTasks;
-    });
-
     // Функция для обновления счётчика при решении задачи
     function updateSolvedCount(newCount) {
         document.getElementById('solved-tasks').innerText = newCount;
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+    let solvedTasks = parseInt(localStorage.getItem('solved_tasks') || 0);
+
+    const levelLinks = document.querySelectorAll('a[th\\:href^="@{/task/"], a[href^="/task/"]');
+
+    levelLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            // Извлекаем номер уровня из href (например, /task/3)
+            const match = this.getAttribute('href').match(/\/task\/(\d+)/);
+            if (match) {
+                const levelNumber = parseInt(match[1]);
+                if (levelNumber > solvedTasks + 1) {
+                    event.preventDefault(); 
+                    alert("Сначала нужно пройти предыдущий уровень!");
+                }
+            }
+        });
+    });
+
+    // Отображаем количество решённых задач
+    const solvedElement = document.getElementById('solved-tasks');
+    if (solvedElement) {
+        solvedElement.innerText = solvedTasks;
+    }
+});
+
 </script>
 </body>
 </html>

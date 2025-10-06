@@ -7,7 +7,6 @@
     <link rel="stylesheet" th:href="@{/css/stylesLev.css}" />
     <title>LVL1.Шифр Цезаря</title>
     <style>
-
         /* Основной контейнер */
         .main-container {
             max-width: 1200px;
@@ -98,13 +97,13 @@
                 <li>
                     <a href="#">Играть</a>
                     <ul>
-                        <li><a href="#">Меню</a></li>
+                        <li><a th:href="@{/profile}">Меню</a></li>
                         <li><a href="#">Справка</a></li>
                         <li><a href="#">Достижения</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Контакты</a>
+                <li><a th:href="@{/contacts}">Контакты</a></li>
                 </li>
             </ul>
         </nav>
@@ -301,8 +300,21 @@
                 }
             });
 
-            document.getElementById('nextBtn').addEventListener('click', () => {
+            document.getElementById('nextBtn').addEventListener('click', (e) => {
+                e.preventDefault(); // блокируем стандартное действие кнопки
+
                 const href = document.querySelector('#nextBtn').dataset.href;
+                const solvedTasks = parseInt(localStorage.getItem('solved_tasks') || '0');
+                const taskNumber = parseInt(window.location.pathname.split('/').pop());
+
+                // Проверка: решено ли предыдущее задание
+                if (solvedTasks < taskNumber) {
+                    alert(`Решите предыдущее задание. Решённых: ${solvedTasks}. Требуется: ${taskNumber}`);
+                    // ОСТАЁМСЯ на текущей странице
+                    return;
+                }
+
+                // Если доступ разрешён — переходим
                 if (href) {
                     window.location.href = href;
                 }
