@@ -14,6 +14,7 @@ public class PageController {
     public String index() {
         return "index";
     }
+
     @GetMapping("/profile")
     public String profile(HttpSession session, Model model) {
         Object userObj = session.getAttribute("user");
@@ -23,7 +24,6 @@ public class PageController {
         model.addAttribute("user", userObj);
         return "profile"; // profile.html
     }
-
 
     @GetMapping("/login")
     public String loginPage() {
@@ -51,5 +51,10 @@ public class PageController {
         model.addAttribute("level", level);
         // Можно передать содержимое справочного материала, если есть
         return "info";
+    }
+
+    @GetMapping("/theory")
+    public String theory() {
+        return "theory";
     }
 }

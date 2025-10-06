@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Контакты</title>
@@ -19,7 +20,7 @@
         .contacts-list {
             display: flex;
             justify-content: center;
-            gap: 103px; /* расстояние между аватарками */
+            gap: 103px;
             margin-bottom: 40px;
         }
 
@@ -30,9 +31,9 @@
         .contact-item img {
             width: 311px;
             height: 311px;
-            border-radius: 50%; /* делает максимально круглыми */
+            border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #fff; /* необязательно, для акцента */
+            border: 3px solid #fff;
         }
 
         .contact-name {
@@ -49,47 +50,156 @@
             margin-top: 40px;
             font-size: 18px;
             color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .contact-role {
+            margin-top: 5px;
+            font-size: 16px;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            font-weight: normal;
+        }
+
+        .contact-mail {
+            margin-top: 5px;
+            font-size: 16px;
+            color: #7ea0ff;
+            font-family: Arial, sans-serif;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        footer {
+            position: static !important;
+            margin-top: 40px;
+        }
+
+        /* ==== УВЕДОМЛЕНИЕ (АЛЕРТ) ==== */
+        .alert-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .alert-box {
+            background-color: rgba(10, 10, 10, 0.8);
+            color: #f0f0f0;
+            padding: 25px 35px;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+            width: 400px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .alert-title {
+            font-family: 'Capture Smallz', sans-serif;
+            color: #6d4c4c;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .alert-text {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .alert-btn {
+            padding: 8px 20px;
+            font-size: 16px;
+            background-color: #0b2e2a;
+            color: #e0e0e0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .alert-btn:hover {
+            background-color: #135a51;
         }
     </style>
 </head>
+
 <body>
-<header>
-    <nav class="menu">
-        <ul>
-            <li><a th:href="@{/}">Главная</a></li>
-            <li><a th:href="@{/profile}">Играть</a></li>
-            <li><a th:href="@{/contacts}">Контакты</a></li>
-        </ul>
-    </nav>
-</header>
+    <header>
+        <nav class="menu">
+            <ul>
+                <li><a th:href="@{/}">Главная</a></li>
+                <li><a th:href="@{/profile}">Играть</a></li>
+                <li><a th:href="@{/contacts}">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<main class="contacts-container">
-    <h2 class="contacts-title">Контакты</h2>
+    <main class="contacts-container">
+        <h2 class="contacts-title">Контакты</h2>
 
-    <div class="contacts-list">
-        <div class="contact-item">
-            <img src="/images/rashoyan.jpg" alt="Рашоян А.Д">
-            <div class="contact-name">Рашоян А.Д</div>
+        <div class="contacts-list">
+            <div class="contact-item">
+                <img src="/images/rashoyan.jpg" alt="Рашоян А. Д.">
+                <div class="contact-name">Рашоян А. Д.</div>
+                <div class="contact-mail" onclick="copyEmail('adrashoian@edu.hse.ru')">adrashoian@edu.hse.ru</div>
+                <div class="contact-role">студентка ПСАПР-24-1</div>
+            </div>
+            <div class="contact-item">
+                <img src='/images/mikhailov.png' alt="Михайлов А. В.">
+                <div class="contact-name">Михайлов А. В.</div>
+                <div class="contact-role">научный руководитель</div>
+            </div>
+            <div class="contact-item">
+                <img src="/images/kobzeva.png" alt="Кобзева А. Ю.">
+                <div class="contact-name">Кобзева А. Ю.</div>
+                <div class="contact-mail" onclick="copyEmail('akobzeva@edu.hse.ru')">akobzeva@edu.hse.ru</div>
+                <div class="contact-role">студентка ПСАПР-24-1</div>
+            </div>
         </div>
-        <div class="contact-item">
-            <img src='/images/mikhailov.png' alt="Михайлов">
 
-            <div class="contact-name">Михайлов</div>
+        <div class="contacts-footer">
+            <p>НИУ ВШЭ-Пермь. г. Пермь, ул. Студенческая, д. 38</p>
         </div>
-        <div class="contact-item">
-            <img src="/images/kobzeva.png" alt="Кобзева А.Ю">
-            <div class="contact-name">Кобзева А.Ю</div>
-        </div>
-    </div>
+    </main>
 
-    <div class="contacts-footer">
-        <p>Наш адрес: Студенческая, д.38, г. Пермь</p>
-        <p>Наша почта: info@example.com</p>
-    </div>
-</main>
+    <footer>
+        <p>© 2025 Все права защищены</p>
+    </footer>
 
-<footer>
-    <p>© 2025 Все права защищены</p>
-</footer>
+    <script>
+        function copyEmail(email) {
+            navigator.clipboard.writeText(email);
+            showCustomAlert("Успешно", "Почта скопирована в буфер обмена.");
+        }
+
+        function showCustomAlert(title, message) {
+            const overlay = document.createElement('div');
+            overlay.classList.add('alert-overlay');
+
+            const alertBox = document.createElement('div');
+            alertBox.classList.add('alert-box');
+
+            alertBox.innerHTML = `
+                <h2 class="alert-title">${title}</h2>
+                <p class="alert-text">${message}</p>
+                <button id="closeAlertBtn" class="alert-btn">OK</button>
+            `;
+
+            overlay.appendChild(alertBox);
+            document.body.appendChild(overlay);
+
+            document.getElementById('closeAlertBtn').addEventListener('click', () => overlay.remove());
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) overlay.remove();
+            });
+        }
+    </script>
 </body>
+
 </html>
