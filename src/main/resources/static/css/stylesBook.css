@@ -1,9 +1,3 @@
-/* Общие стили для тела страницы */
-{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
 
 body {
     margin: 0;
@@ -11,20 +5,16 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-family: 'Capture Smallz', sans-serif;
+    font-family: 'Capture Smallz';
     background-color: rgba(6, 28, 28, 1);
     background-image: url('back.jpg');
-    background-size: cover;
-    background-position: center;
+    background-size: cover; /* чтобы изображение покрывало весь фон */
+    background-position: center; /* центрирование изображения */
     background-repeat: no-repeat;
-    /* Можно добавить полупрозрачность через overlay, если нужно */
+    background-color: #1e222b;
+    color: #fff;
 }
 
-/* Анимация прозрачности для изображений, если есть */
-img {
-    opacity: 0.7;
-}
-/* Шапка сайта */
 header {
     background-color: #081a19;
     padding: 8px 20px;
@@ -88,67 +78,79 @@ li:hover > ul {
     display: block;
 }
 
-/* Основной контент */
-main {
-    flex: 1;
-    padding: 40px 20px;
-    text-align: center;
-    font-size: 24px;
-    height: auto;
+.container {
+    /*width: 60%;*/
+    margin: 0 auto;
 }
 
-/* Подвал сайта */
-footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #082320;
-    color: #fff;
-    padding: 25px 20px 10px 50px;
-    font-size: 16px;
-    text-align: right;
+.content {
+    display: flex;
+    padding: 100px;
+    gap: 20px;
 }
 
-/* Таблица */
-table {
-    width: 80%;
-    background-color: #374444;
-    margin: 0 auto; /* Центрирование таблицы */
-    border-collapse: separate;
-    border-spacing: 18px;
-    border-radius: 15px;
-    font-family: 'Capture Smallz';
+/* Боковая панель */
+
+.title {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.list {
+    display: flex;
+    flex-direction: column;
 }
 
 
-/* Таблица с кнопками */
-table.buttons-table {
-    margin-left: 40px;
-}
-
-/* Стиль для кнопок внутри таблицы */
-.buttons-table button {
-    width: 220px;
-    height: 120px;
-    margin: 10px;
-    background-color: #D9D9D9;
+.list-item {
+    background-color: #3b3f4b;
+    width: 500px;
     opacity: 0.7;
-    font-size: 30px;
-    font-family: 'Capture Smallz';
-    border: none;
-    border-radius: 8px;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 15px;
     cursor: pointer;
-    transition: background-color 0.6s, transform 0.2s;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.list-item:hover {
+    background-color: #505361;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+.list-item.selected {
+    background-color: #4e5366;
+    font-weight: bold;
 }
 
-/* Стиль при наведении на кнопки */
-.buttons-table button:hover {
-    background-color: #c0c0c0; /* чуть более тёмный цвет */
-    transform: scale(1.05); /* лёгкое увеличение */
+.list-item1:hover {
+    /*background-color: #505361; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+}
+.list-item1.selected {
+    background-color: #4e5366;
+    font-weight: bold;
 }
 
-/* Импорт шрифта */
+/* Основная часть */
+.content-mainer {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start; /* выравнивание по вертикали */
+    flex: 1;
+}
+
+/* Подсветка текста при наведении */
+.list-item,
+.list-item1{
+    transition: color 0.3s, background-color 0.3s, transform 0.3s;
+}
+.list-item:hover,
+.list-item1:hover{
+    cursor: pointer;
+    color: #20d4a1;
+    transform: translateY(-2px);
+}
+
 @font-face {
     font-family: 'Capture Smallz';
     src: url('19182.ttf') format('truetype');

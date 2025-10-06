@@ -1,60 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/stylesLev.css}" />
     <title>LVL1.Шифр Цезаря</title>
     <style>
-        /* Общие стили */
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #2c3e50; /* тёмный фон */
-            color: #fff;
-        }
-
-        /* Меню навигации */
-        .menu ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            background-color: #34495e;
-            display: flex;
-        }
-
-        .menu ul li {
-            position: relative;
-        }
-
-        .menu ul li a {
-            display: block;
-            padding: 10px 20px;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .menu ul li ul {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: #3b5998;
-            flex-direction: column;
-            min-width: 150px;
-            z-index: 1000;
-        }
-
-        .menu ul li:hover ul {
-            display: flex;
-        }
-
-        .menu ul li ul li {
-            width: 100%;
-        }
-
-        .menu ul li ul li a {
-            padding: 10px;
-        }
 
         /* Основной контейнер */
         .main-container {
@@ -120,226 +72,243 @@
             width: 100%;
             border-collapse: collapse;
         }
+
         .tableAns td {
             padding: 5px;
         }
+
         .wide-column {
             width: 50%;
         }
-        button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            background-color: #2980b9;
-            color: #fff;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #3498db;
-        }
     </style>
 </head>
+
 <body>
 
-<header>
-    <nav class="menu">
-        <ul>
-            <li>
-                <a href="#">Главная</a>
-                <ul>
-                    <li><a href="#">Регистрация</a></li>
-                    <li><a href="#">Вход</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">Играть</a>
-                <ul>
-                    <li><a href="#">Меню</a></li>
-                    <li><a href="#">Справка</a></li>
-                    <li><a href="#">Достижения</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">Контакты</a>
-            </li>
+    <header>
+        <nav class="menu">
+            <ul>
+                <li>
+                    <a href="#">Главная</a>
+                    <ul>
+                        <li><a href="#">Регистрация</a></li>
+                        <li><a href="#">Вход</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Играть</a>
+                    <ul>
+                        <li><a href="#">Меню</a></li>
+                        <li><a href="#">Справка</a></li>
+                        <li><a href="#">Достижения</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Контакты</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-            <li>
-                <a href="#" id="logoutBtn">Выход</a>
-            </li>
-        </ul>
-    </nav>
-</header>
-
-<!-- Основной блок -->
-<div class="main-container">
-    <div class="title" id="task-title">LVL1.ШИФР ЦЕЗАРЯ</div>
-    <div class="content-container">
-        <!-- Левая часть -->
-        <div class="left-section">
-            <div class="description" id="task-condition">
-                Условие задачи
+    <!-- Основной блок -->
+    <div class="main-container">
+        <div class="title" id="task-title">LVL1.ШИФР ЦЕЗАРЯ</div>
+        <div class="content-container">
+            <!-- Левая часть -->
+            <div class="left-section">
+                <div class="description" id="task-condition">
+                    Условие задачи
+                </div>
+            </div>
+            <!-- Правая часть -->
+            <div class="right-section">
+                <!-- Вывод сообщения / кода -->
+                <div id="codeBox">Здесь выводится код</div>
+                <!-- Таблица с кнопками -->
+                <table class="tableAns">
+                    <tr>
+                        <td class="wide-column"><button id="answerBtn">Введите свой ответ</button></td>
+                        <td><button id="helpBtn">Помощь</button></td>
+                    </tr>
+                    <tr>
+                        <td class="wide-column"><button id="checkBtn">Проверить</button></td>
+                        <td><button id="nextBtn">След</button></td>
+                    </tr>
+                </table>
+                <!-- Решённые задачи -->
+                <div style="margin-top:10px;">Решённых задач: <span id="solvedCount">0</span></div>
             </div>
         </div>
-        <!-- Правая часть -->
-        <div class="right-section">
-            <!-- Вывод сообщения / кода -->
-            <div id="codeBox">Здесь выводится код</div>
-            <!-- Таблица с кнопками -->
-            <table class="tableAns">
-                <tr>
-                    <td class="wide-column"><button id="answerBtn">Введите свой ответ</button></td>
-                    <td><button id="helpBtn">Помощь</button></td>
-                </tr>
-                <tr>
-                    <td class="wide-column"><button id="checkBtn">Проверить</button></td>
-                    <td><button id="nextBtn">След</button></td>
-                </tr>
-            </table>
-            <!-- Решённые задачи -->
-            <div style="margin-top:10px;">Решённых задач: <span id="solvedCount">0</span></div>
-        </div>
     </div>
-</div>
 
-<script>
-    const pathParts = window.location.pathname.split('/');
-    const taskNumber = parseInt(pathParts[pathParts.length - 1]);
+    <script>
+        const pathParts = window.location.pathname.split('/');
+        const taskNumber = parseInt(pathParts[pathParts.length - 1]);
 
-    const tasks = {
-        1: {
-            title: 'Lvl 1. Шифр Цезаря',
-            condition: 'YHGL YLGL YLFL?',
-            answer: 'VENI VIDI VICI',
-            description: 'условие задачи номер 1'
-        },
-        2: {
-            title: 'Lvl 2. Шифр Цезаря, продолжение',
-            condition: 'Г мф Ъкнм?',
-            answer: 'И ты Брут',
-            description: 'условие задачи номер 2'
-        },
-        3: {
-            title: 'Lvl 3.',
-            condition: 'Известно исходное сообщение “Криптография – это наука”, а также результат применения к нему аффинного шифра с параметром b = 7: “пафуьеразчфмсьешзйпз” (пробелы и знаки пунктуации были опущены). Используя формулу для шифрования, вычисли минимально возможное значение параметра a.',
-            answer: '14',
-            description: 'условие задачи номер 3'
-        },
-        4: {
-            title: 'Lvl 4. Шифр Виженера',
-            condition: 'Ключ : Это Ключ, Сообщение:Ъеэтлцасгэмллелчащъярвачп',
-            answer: 'Ъеэтлцасгэмллелчащъярвачп',
-            description: 'условие задачи номер 4'
-        },
-        5: {
-            title: 'Lvl 5.Взлом шифра Виженера',
-            condition: 'Гчжырысуапятчэщшэфтъбчоеж',
-            answer: 'Шифр Виженера можно взломать',
-            description: 'условие задачи номер 5'
-        },
-        6: {
-            title: 'Lvl 6.  Шифр Вернама',
-            condition: 'Сообщение 1: Ц Д Ы Я Л Ъ К Л К И Г Е\nСообщение 2: А Г Я В А В Б Е Щ Р С Е\n, (Ключ: З Б С П О И Ж Е Ы В Б Е)',
-            answer: 'секретмосква,звонокзавтра',
-            description: 'условие задачи номер 6'
-        },
-        7: { title: 'Lvl 7.Протокол Диффи – Хеллмана', condition: 'Задача 7', answer: 'Ответ7',
-            description: 'условие задачи номер 7' },
-        8: { title: 'Lvl 8', condition: 'Задача 8', answer: 'Ответ8',
-            description: 'условие задачи номер 8' },
-        9: { title: 'Lvl 9Хэширование', condition: 'Задача 9', answer: 'Ответ9', description: 'условие задачи номер 9' },
-        10: { title: 'Lvl 10.  DES.Data Encryption Standard', condition: 'Задача 10', answer: 'Ответ10',
-            description: 'Определи, какие способы помогут увеличить стойкость DES-шифрования. В качестве ответа запиши последовательность цифр подходящих вариантов по возрастанию.\n' +
-                'Увеличение длины ключа до 128 бит\n' +
-                'Многократное применение DES с разными ключами\n' +
-                'Удаление битов чётности из ключа\n' +
-                'Замена блочного подхода на потоковый\n' +
-                'Собственная модификация S-блоков и E- и P-таблиц\n' +
-                'Размещение ключей в защищённом хранилище\n' +
-                'Хранение ключей в открытом виде в базе данных\n' },
-        11: { title: 'Lvl 11', condition: 'Задача 11', answer: 'Ответ11', description: 'условие задачи номер 11' },
-        12: { title: 'Lvl 12.AES (Advanced Encryption Standard)', condition: 'Задача 12', answer: 'Ответ12', description: 'условие задачи номер 12' }
-    };
+        const tasks = {
+            1: {
+                title: 'Lvl 1. Шифр Цезаря',
+                condition: 'YHGL YLGL YLFL?',
+                answer: 'VENI VIDI VICI',
+                description: 'Расшифруйте текст, записанный при помощи шифра Цезаря буквами латинского алфавита. Известно, что шифрование выполнялось с циклическим сдвигом влево на 3 позиции. В качестве ответа предоставьте фразу без дополнительных символов, слова запишите через пробел. Регистр не учитывается.'
+            },
+            2: {
+                title: 'Lvl 2. Шифр Цезаря, продолжение',
+                condition: 'Г мф Ъкнм?',
+                answer: 'И ты Брут',
+                description: 'Исходный текст, содержащий буквы русского алфавита, был зашифрован при помощи шифра Цезаря со сдвигом на 3 позиции вправо. Однако полученное сообщение для надёжности составитель зашифровал ещё раз тем же самым шифром. Требуется восстановить исходное сообщение. В качестве ответа предоставьте фразу без дополнительных символов, слова запишите через пробел. Регистр не учитывается.'
+            },
+            3: {
+                title: 'Lvl 3.',
+                condition: 'пафуьеразчфмсьешзйпз',
+                answer: '14',
+                description: 'Известно исходное сообщение “Криптография – это наука”, а также результат применения к нему аффинного шифра с параметром b = 7: “пафуьеразчфмсьешзйпз” (пробелы и знаки пунктуации были опущены). Используя формулу для шифрования, вычисли минимально возможное значение параметра a.'
+            },
+            4: {
+                title: 'Lvl 4. Шифр Виженера',
+                condition: 'Ключ: "это ключ", Сообщение: Ъеэтлцасгэмллелчащъярвачп',
+                answer: 'Это сообщение зашифровано',
+                description: 'Сообщение было зашифровано с помощью шифра Виженера. Требуется его расшифровать.'
 
-    const task = tasks[taskNumber];
+            },
+            5: {
+                title: 'Lvl 5.Взлом шифра Виженера',
+                condition: 'Гчжырысуапятчэщшэфтъбчоеж',
+                answer: 'Шифр Виженера можно взломать',
+                description: 'Сообщение зашифровано шифром Виженера с неизвестным ключом. Требуется восстановить исходный текст и ключ. Известно, что ключ состоит из трёх букв, первая буква – "к", ключ содержит одну согласную букву. В качестве ответа запишите расшифрованное сообщение.'
+            },
+            6: {
+                title: 'Lvl 6.  Шифр Вернама',
+                condition: 'Сообщение 1: Ц Д Ы Я Л Ъ К Л К И Г Е\nСообщение 2: А Г Я В А В Б Е Щ Р С Е',
+                answer: 'секретмосква,звонокзавтра',
+                description: 'перехвачены два сообщения, зашифрованные одним и тем же ключом. Известно, что в одном из них содержится слово "Москва". Восстановите исходные сообщения без знания ключа. В качестве ответа запишите их без пробелов, разделив запятой.'
+            },
+            7: {
+                title: 'Lvl 7. Шифр Плейфера',
+                condition: 'Attack at down\nТаблица:\n A B C D E\nF G H I K\nL M N O P\nQ R S T U\nV W X Y Z',
+                answer: 'GZZGBHGZGFVO',
+                description: 'С помощью ключевого слова "surface" и таблицы зашифруй фразу "Attack at dawn". В ответ запиши последовательность букв без пробелов и других символов, регистр не учитывается.'
+            },
+            8: {
+                title: 'Lvl 8. Протокол Диффи – Хеллмана',
+                condition: 'p = 47\ng = 5\na = 7\nb = 11',
+                answer: '403811',
+                description: 'Представим, что Алиса и Боб обмениваются ключами и используют следующие параметры: p = 47, g = 5, a = 7, b = 11. Злоумышленник Мэллори реализует атаку "человек посередине", он выбрал m = 9 и подставляет свой значение вместо значений сторон. Вычислите:\n1. Какое значение M подставляет Мэллори и сообщает Бобу с Алисой?\n2. Какой секрет получает Алиса с Мэллори?\n3. Какой секрет получает Боб с Мэллори?\nВ качестве ответа предоставь 3 числа, записанные подряд без пробелов.'
+            },
+            9: {
+                title: 'Lvl 9. Хэширование',
+                condition: 'Пароль - имя  моего кота',
+                answer: '25',
+                description: 'Необходимо с помощью хэширования зашифровать сообщение на русском языке – "Пароль – имя моего кота". Пробелы и знаки пунктуации нужно опустить. Использовать следующую хэш-функцию:\nh(s) = (знак суммы по s (порядковый номер буквы в алфавите)) mod 50. То есть нужно для каждой буквы определить номер, сложить все номера и найти остаток от деления этой суммы на 50. Полученный хэш – число – записать в ответ.'
+            },
+            10: {
+                title: 'Lvl 10. DES (Data Encryption Standard)',
+                condition: 'Data Encryption Standard – это алгоритм для симметричного шифрования.',
+                answer: '126',
+                description: 'Определи, какие способы помогут увеличить стойкость DES-шифрования. В качестве ответа запиши последовательность цифр подходящих вариантов по возрастанию.\n' +
+                    '1. Увеличение длины ключа до 128 бит\n' +
+                    '2. Многократное применение DES с разными ключами\n' +
+                    '3. Удаление битов чётности из ключа\n' +
+                    '4. Замена блочного подхода на потоковый\n' +
+                    '5. Собственная модификация S-блоков и E- и P-таблиц\n' +
+                    '6. Размещение ключей в защищённом хранилище\n' +
+                    '7. Хранение ключей в открытом виде в базе данных'
+            },
+            11: {
+                title: 'Lvl 11',
+                condition: 'Задача 11',
+                answer: 'Ответ11',
+                description: 'условие задачи номер 11'
+            },
+            12: {
+                title: 'Lvl 12. AES (Advanced Encryption Standard)',
+                condition: 'U2FsdGVkX19DHqn8TXkJzO/YUVuYJCvxQ86yhzYhivdxLJ5zhbcZLeCkc7y4j+4K958HycYRRovfE0nGezgeZQSRQ2aYmwu5wL/TEyodqUk=',
+                answer: 'Поздравляем, вы прошли все уровни!',
+                description: 'Прочитайте сообщение, зашифрованное при помощи алгоритма AES с ключом длиной 256 бит. Для расшифровки нажмите на кнопку.'
+            }
+        };
 
-    if (!task) {
-        document.body.innerHTML = '<h2>Задача не найдена</h2>';
-    } else {
+        helpBtn.addEventListener('click', () => {
+            window.location.href = `/info?level=${taskNumber}`;
+        });
+        const task = tasks[taskNumber];
 
-        document.getElementById('task-title').innerText = task.title;
-        document.getElementById('task-condition').innerText = task.condition;
-        document.getElementById('task-condition').innerText = task.description;
-
-        document.getElementById('codeBox').innerText = task.condition;
-
-        const nextNumber = taskNumber + 1;
-        const nextLink = document.getElementById('nextBtn');
-        if (tasks[nextNumber]) {
-            nextLink.dataset.href = `/task/${nextNumber}`;
-            nextLink.innerText = 'Следующее задание';
+        if (!task) {
+            document.body.innerHTML = '<h2>Задача не найдена</h2>';
         } else {
-            nextLink.style.display = 'none';
-        }
 
-        // Загружаем прогресс
-        let solvedTasks = parseInt(localStorage.getItem('solved_tasks') || '0');
-        document.getElementById('solvedCount').innerText = solvedTasks;
+            document.getElementById('task-title').innerText = task.title;
+            document.getElementById('task-condition').innerText = task.condition;
+            document.getElementById('task-condition').innerText = task.description;
 
-        // Блокировка, если не решены предыдущие
-        if (solvedTasks < taskNumber - 1) {
-            alert(`Решите предыдущее задание. Решённых: ${solvedTasks}. Требуется: ${taskNumber - 1}`);
-            document.getElementById('nextBtn').disabled = true;
-            document.getElementById('nextBtn').style.opacity = '0.5';
-        }
+            document.getElementById('codeBox').innerText = task.condition;
 
-        let alreadySolved = solvedTasks >= taskNumber;
-
-        document.getElementById('answerBtn').addEventListener('click', () => {
-            const answer = prompt('Введите ваш ответ:');
-            if (answer !== null) {
-                document.getElementById('answer').value = answer;
-            }
-        });
-
-        document.getElementById('checkBtn').addEventListener('click', () => {
-            const userAnswer = document.getElementById('answer').value.trim().toLowerCase();
-            const correctAnswer = task.answer.toLowerCase();
-            if (userAnswer === correctAnswer) {
-                alert('Правильно!');
-                if (!alreadySolved) {
-                    fetch(`/api/tasks/solve/${taskNumber}`, { method: 'POST' })
-                        .then(res => {
-                            if (res.ok) {
-                                let newCount = solvedTasks + 1;
-                                localStorage.setItem('solved_tasks', newCount);
-                                document.getElementById('solvedCount').innerText = newCount;
-                                solvedTasks = newCount;
-                                alreadySolved = true;
-                                document.getElementById('nextBtn').disabled = false;
-                                document.getElementById('nextBtn').style.opacity = '';
-                                alert('Прогресс обновлён! Можете перейти к следующему заданию.');
-                            } else {
-                                alert('Ошибка при обновлении прогресса.');
-                            }
-                        });
-                } else {
-                    alert('Это задание уже решено.');
-                }
+            const nextNumber = taskNumber + 1;
+            const nextLink = document.getElementById('nextBtn');
+            if (tasks[nextNumber]) {
+                nextLink.dataset.href = `/task/${nextNumber}`;
+                nextLink.innerText = 'Следующее задание';
             } else {
-                alert('Неправильно. Попробуйте снова.');
+                nextLink.style.display = 'none';
             }
-        });
 
-        document.getElementById('nextBtn').addEventListener('click', () => {
-            const href = document.querySelector('#nextBtn').dataset.href;
-            if (href) {
-                window.location.href = href;
+            // Загружаем прогресс
+            let solvedTasks = parseInt(localStorage.getItem('solved_tasks') || '0');
+            document.getElementById('solvedCount').innerText = solvedTasks;
+
+            // Блокировка, если не решены предыдущие
+            if (solvedTasks < taskNumber - 1) {
+                alert(`Решите предыдущее задание. Решённых: ${solvedTasks}. Требуется: ${taskNumber - 1}`);
+                document.getElementById('nextBtn').disabled = true;
+                document.getElementById('nextBtn').style.opacity = '0.5';
             }
-        });
-    }
-</script>
+
+            let alreadySolved = solvedTasks >= taskNumber;
+
+            document.getElementById('answerBtn').addEventListener('click', () => {
+                const answer = prompt('Введите ваш ответ:');
+                if (answer !== null) {
+                    document.getElementById('answer').value = answer;
+                }
+            });
+
+            document.getElementById('checkBtn').addEventListener('click', () => {
+                const userAnswer = document.getElementById('answer').value.trim().toLowerCase();
+                const correctAnswer = task.answer.toLowerCase();
+                if (userAnswer === correctAnswer) {
+                    alert('Правильно!');
+                    if (!alreadySolved) {
+                        fetch(`/api/tasks/solve/${taskNumber}`, { method: 'POST' })
+                            .then(res => {
+                                if (res.ok) {
+                                    let newCount = solvedTasks + 1;
+                                    localStorage.setItem('solved_tasks', newCount);
+                                    document.getElementById('solvedCount').innerText = newCount;
+                                    solvedTasks = newCount;
+                                    alreadySolved = true;
+                                    document.getElementById('nextBtn').disabled = false;
+                                    document.getElementById('nextBtn').style.opacity = '';
+                                    alert('Прогресс обновлён! Можете перейти к следующему заданию.');
+                                } else {
+                                    alert('Ошибка при обновлении прогресса.');
+                                }
+                            });
+                    } else {
+                        alert('Это задание уже решено.');
+                    }
+                } else {
+                    alert('Неправильно. Попробуйте снова.');
+                }
+            });
+
+            document.getElementById('nextBtn').addEventListener('click', () => {
+                const href = document.querySelector('#nextBtn').dataset.href;
+                if (href) {
+                    window.location.href = href;
+                }
+            });
+        }
+    </script>
 </body>
+
 </html>

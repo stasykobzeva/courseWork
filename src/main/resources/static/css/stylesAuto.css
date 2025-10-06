@@ -1,0 +1,183 @@
+
+{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #081a19;
+    padding: 8px 20px;
+    display: flex;
+    font-size: 16px;
+    justify-content: flex-end; /* меню справа */
+}
+
+/* Список меню без маркеров и с горизонтальным расположением */
+nav.menu > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 25px; /* расстояние между пунктами */
+}
+
+nav.menu > ul > li {
+    position: relative; /* для позиционирования подменю */
+}
+
+/* Ссылки меню */
+nav.menu > ul > li > a {
+    color: #4a4f55;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Эффект наведения */
+nav.menu > ul > li > a:hover {
+    background-color: #0b2e2a;
+}
+
+/* Подменю */
+li ul {
+    display: none;
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: auto; /* фиксированная ширина для подменю */
+    background-color: #0d3833;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Пункты подменю */
+li ul li a {
+    padding: 10px 15px;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    width: 100%; /* растягиваем по ширине подменю */
+    box-sizing: border-box;
+}
+
+/* Отображение подменю при наведении */
+li:hover > ul {
+    display: block;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Capture Smallz', sans-serif;
+    background-color: rgba(6, 28, 28, 1);
+    background-image: url('back.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Можно добавить полупрозрачность через overlay, если нужно */
+}
+
+/* Анимация прозрачности для изображений, если есть */
+img {
+    opacity: 0.7;
+}
+
+/* Центрирование контейнера формы */
+.container {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* по горизонтали */
+    align-items: center;     /* по вертикали */
+    padding: 20px;
+}
+
+/* Карточка формы */
+.login-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Capture Smallz', sans-serif;
+    font-size: 28px;
+    color: #000000;
+}
+
+/* Поля ввода */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+    outline: none;
+}
+
+/* Кнопка входа */
+button {
+    width: 100%;
+    padding: 14px;
+    font-size: 18px;
+    font-family: 'Capture Smallz', sans-serif;
+    cursor: pointer;
+    background-color: rgba(147, 100, 100, 0.75);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #4a4f55;
+    transform: scale(1.02);
+}
+
+/* Сообщение об ошибке или успехе */
+#message {
+    margin-top: 15px;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Ссылки под формой */
+p {
+    text-align: center;
+    margin-top: 15px;
+}
+a {
+    color: #4a90e2;
+    text-decoration: none;
+    font-weight: 500;
+}
+a:hover {
+    text-decoration: underline;
+}
