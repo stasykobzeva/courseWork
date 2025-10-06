@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Контакты</title>
+    <link rel="stylesheet" th:href="@{/css/stylesMenu.css}" />
+    <style>
+        .contacts-container {
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .contacts-title {
+            font-size: 32px;
+            color: #cddbe0;
+            margin-bottom: 50px;
+        }
+
+        .contacts-list {
+            display: flex;
+            justify-content: center;
+            gap: 103px; /* расстояние между аватарками */
+            margin-bottom: 40px;
+        }
+
+        .contact-item {
+            text-align: center;
+        }
+
+        .contact-item img {
+            width: 311px;
+            height: 311px;
+            border-radius: 50%; /* делает максимально круглыми */
+            object-fit: cover;
+            border: 3px solid #fff; /* необязательно, для акцента */
+        }
+
+        .contact-name {
+            margin-top: 15px;
+            font-size: 20px;
+            background: #6d4c4c;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .contacts-footer {
+            margin-top: 40px;
+            font-size: 18px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="menu">
+        <ul>
+            <li><a th:href="@{/}">Главная</a></li>
+            <li><a th:href="@{/profile}">Играть</a></li>
+            <li><a th:href="@{/contacts}">Контакты</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="contacts-container">
+    <h2 class="contacts-title">Контакты</h2>
+
+    <div class="contacts-list">
+        <div class="contact-item">
+            <img src="/images/rashoyan.jpg" alt="Рашоян А.Д">
+            <div class="contact-name">Рашоян А.Д</div>
+        </div>
+        <div class="contact-item">
+            <img src='/images/mikhailov.png' alt="Михайлов">
+
+            <div class="contact-name">Михайлов</div>
+        </div>
+        <div class="contact-item">
+            <img src="/images/kobzeva.png" alt="Кобзева А.Ю">
+            <div class="contact-name">Кобзева А.Ю</div>
+        </div>
+    </div>
+
+    <div class="contacts-footer">
+        <p>Наш адрес: Студенческая, д.38, г. Пермь</p>
+        <p>Наша почта: info@example.com</p>
+    </div>
+</main>
+
+<footer>
+    <p>© 2025 Все права защищены</p>
+</footer>
+</body>
+</html>

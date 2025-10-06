@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class PageController {
 
+    /*  @GetMapping("/contacts")
+    public String contacts() {
+        return "contacts";}
+
+     */
     @GetMapping("/index")
     public String index() {
         return "index";
@@ -22,6 +27,7 @@ public class PageController {
         model.addAttribute("user", userObj);
         return "profile"; // profile.html
     }
+
 
     @GetMapping("/login")
     public String loginPage() {
