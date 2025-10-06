@@ -10,11 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class PageController {
 
-    /*  @GetMapping("/contacts")
-    public String contacts() {
-        return "contacts";}
-
-     */
     @GetMapping("/index")
     public String index() {
         return "index";
@@ -42,20 +37,19 @@ public class PageController {
 
     @GetMapping("/register")
     public String registerPage() {
-        return "register"; // register.html
+        return "register";
     }
 
     @GetMapping("/task/{taskNumber}")
     public String getTask(@PathVariable int taskNumber, Model model) {
         model.addAttribute("taskNumber", taskNumber);
-        return "task"; // шаблон task.html
+        return "task";
     }
 
     @GetMapping("/info")
     public String getInfo(@RequestParam("level") int level, Model model) {
-        // Передать уровень и содержимое в шаблон
         model.addAttribute("level", level);
         // Можно передать содержимое справочного материала, если есть
-        return "info"; // название шаблона info.html
+        return "info";
     }
 }

@@ -78,7 +78,7 @@ li:hover > ul {
 /* Основной блок */
 .main-container {
     display: flex;
-    width: 70%;
+    width: 100%;
     margin: auto;
     flex-direction: column;
     align-items: flex-start;
@@ -87,7 +87,7 @@ li:hover > ul {
 }
 
 
-
+.
 
 .title {
     display: flex;
@@ -136,6 +136,7 @@ li:hover > ul {
 
 .right-section {
     display: flex;
+    flex:2;
     flex-direction: column;
     align-items: flex-start;
     /*width: 500px;*/

@@ -1,157 +1,189 @@
-
 body {
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-family: 'Capture Smallz';
-    background-color: rgba(6, 28, 28, 1);
+    font-family: 'Capture Smallz', sans-serif;
+    background-color: #1e222b; /* основной цвет фона */
     background-image: url('back.jpg');
-    background-size: cover; /* чтобы изображение покрывало весь фон */
+    background-size: cover; /* изображение покрывает фон полностью */
     background-position: center; /* центрирование изображения */
     background-repeat: no-repeat;
-    background-color: #1e222b;
     color: #fff;
 }
 
+/* Добавляем легкий размытый эффект через псевдоэлемент для фона */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url('back.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(2px); /* легкое размытие */
+    z-index: -1; /* чтобы не мешал содержимому */
+    opacity: 0.8; /* легкая прозрачность */
+}
+
+/* Заголовки и шрифты */
+@font-face {
+    font-family: 'Capture Smallz';
+    src: url('19182.ttf') format('truetype');
+}
+
+/* Хедер */
 header {
     background-color: #081a19;
     padding: 8px 20px;
     display: flex;
+    justify-content: flex-end;
     font-size: 16px;
-    justify-content: flex-end; /* меню справа */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3); /* тень для глубины */
 }
 
-/* Список меню без маркеров и с горизонтальным расположением */
+/* Меню */
 nav.menu > ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
-    gap: 25px; /* расстояние между пунктами */
+    gap: 25px;
 }
 
 nav.menu > ul > li {
-    position: relative; /* для позиционирования подменю */
+    position: relative;
 }
 
-/* Ссылки меню */
 nav.menu > ul > li > a {
-    color: #4a4f55;
-    padding: 10px 15px;
-    text-decoration: none;
     display: block;
+    padding: 10px 15px;
+    color: #4a4f55;
+    text-decoration: none;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    border-radius: 8px;
 }
 
-/* Эффект наведения */
 nav.menu > ul > li > a:hover {
     background-color: #0b2e2a;
+    box-shadow: inset 0 0 5px rgba(255,255,255,0.3); /* эффект свечения */
 }
 
-/* Подменю */
+/* Подменю с мягким эффектом */
 li ul {
     display: none;
-    list-style: none;
     position: absolute;
     top: 100%;
     left: 0;
-    width: auto; /* фиксированная ширина для подменю */
-    background-color: #0d3833;
+    width: auto;
+    background-color: rgba(13, 56, 51, 0.95); /* чуть прозрачное */
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    backdrop-filter: blur(2px); /* легкое размытие фона под подменю */
+    z-index: 999;
 }
 
-/* Пункты подменю */
-li ul li a {
-    padding: 10px 15px;
-    display: block;
-    color: #fff;
-    text-decoration: none;
-    width: 100%; /* растягиваем по ширине подменю */
-    box-sizing: border-box;
-}
-
-/* Отображение подменю при наведении */
 li:hover > ul {
     display: block;
 }
 
-.container {
-    /*width: 60%;*/
-    margin: 0 auto;
+/* Пункты подменю */
+li ul li a {
+    display: block;
+    padding: 10px 15px;
+    width: 100%;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    border-radius: 8px;
 }
 
+li ul li a:hover {
+    background-color: #0b2e2a;
+    box-shadow: inset 0 0 5px rgba(255,255,255,0.3);
+}
+
+/* Основной контейнер */
+.container {
+    margin: 0 auto;
+    max-width: 1200px; /* чтобы не растягивалась слишком сильно */
+}
+
+/* Основной контент */
 .content {
     display: flex;
-    padding: 100px;
+    flex-wrap: wrap; /* адаптивность */
+    padding: 50px 20px;
     gap: 20px;
 }
 
-/* Боковая панель */
-
+/* Заголовок */
 .title {
     font-size: 20px;
     margin-bottom: 10px;
+    font-weight: bold;
+    color: #f0f0f0; /* чуть светлее для контраста */
 }
+
+/* Список элементов */
 .list {
     display: flex;
     flex-direction: column;
+    max-width: 520px;
+    width: 100%;
 }
 
-
-.list-item {
-    background-color: #3b3f4b;
-    width: 500px;
-    opacity: 0.7;
-    padding: 10px 15px;
+/* Стиль элементов списка */
+.list-item,
+.list-item1 {
+    padding: 12px 20px;
     margin-bottom: 8px;
     border-radius: 15px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    background-color: rgba(59, 63, 75, 0.7); /* полупрозрачный фон */
+    transition: all 0.3s ease;
+    width: 100%;
 }
-.list-item:hover {
+
+/* Ховер эффект для элементов */
+.list-item:hover,
+.list-item1:hover {
+    cursor: pointer;
+    color: #20d4a1;
     background-color: #505361;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transform: translateY(-2px);
 }
-.list-item.selected {
-    background-color: #4e5366;
-    font-weight: bold;
-}
 
-.list-item1:hover {
-    /*background-color: #505361; */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transform: translateY(-2px);
-}
+
+/* Выделение выбранных элементов */
+.list-item.selected,
 .list-item1.selected {
     background-color: #4e5366;
     font-weight: bold;
 }
-
-/* Основная часть */
-.content-mainer {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start; /* выравнивание по вертикали */
-    flex: 1;
+.level-link {
+    display: block;
+    text-decoration: none;
+    color: #ffffff;
+    transition: color 0.3s, text-decoration 0.3s; /* плавный переход */
 }
 
-/* Подсветка текста при наведении */
-.list-item,
-.list-item1{
-    transition: color 0.3s, background-color 0.3s, transform 0.3s;
-}
-.list-item:hover,
-.list-item1:hover{
-    cursor: pointer;
+/* Подчеркивание только при наведении */
+.level-link:hover {
     color: #20d4a1;
-    transform: translateY(-2px);
+    text-decoration: underline;
+}
+.list-item,
+.list-item1 {
+    font-family: 'Capture Smallz', sans-serif;
+    font-size: 16px;
 }
 
-@font-face {
-    font-family: 'Capture Smallz';
-    src: url('19182.ttf') format('truetype');
+/* Глобальные эффекты для плавности */
+* {
+    box-sizing: border-box;
 }

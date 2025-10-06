@@ -32,7 +32,6 @@ public class User implements Serializable {
         this.solvedTasks = 0;
     }
 
-    // геттеры и сеттеры
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
